@@ -1,14 +1,8 @@
 from typing import List, Dict, Any
 
 def parse_server_logs(logs: List[str]) -> Dict[str, Any]:
-    # 1. Siapkan penampung: total ping (float), hari sukses (set()), log gagal (int)
-    
-    # 2. Looping setiap baris di dalam logs
-    
-    # 3. Lakukan try...except di dalam loop untuk memproses pemecahan string 
-    #    dan type casting float().
-    
-    # 4. Return dictionary laporannya.
+    for row in logs:
+        raw_data = row.split(' | ')
     pass
 
 # --- EKSEKUSI ---
