@@ -1,17 +1,18 @@
 from typing import List, Dict, Any
 
 def parse_server_logs(logs: List[str]) -> Dict[str, Any]:
-    total_ping = float('inf')
+    total_ping = float()
     unique_days = set()
     failed_log = 0
     for row in logs:
         raw_data = row.split(' | ')
         try:
-            total_ping = float(raw_data[3])
-            unique_days = set(raw_data[0])
+            total_ping += float(raw_data[3])
+            days = raw_data[0]
+            unique_days.add(days)
         except ValueError:
             failed_log += 1
-        except IndexError:
+        except:
             failed_log += 1
     new_dict = {
         "total_ping": total_ping,
