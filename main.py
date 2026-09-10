@@ -1,9 +1,24 @@
 from typing import List, Dict, Any
 
 def parse_server_logs(logs: List[str]) -> Dict[str, Any]:
+    total_ping = float('inf')
+    unique_days = set()
+    failed_log = 0
     for row in logs:
         raw_data = row.split(' | ')
-    pass
+        try:
+            total_ping = float(raw_data[3])
+            unique_days = set(raw_data[0])
+        except ValueError:
+            failed_log += 1
+        except IndexError:
+            failed_log += 1
+    new_dict = {
+        "total_ping": total_ping,
+        "unique_days": unique_days,
+        "failed_log": failed_log
+    }
+    return new_dict
 
 # --- EKSEKUSI ---
 server_logs = [
@@ -14,5 +29,5 @@ server_logs = [
     "2026-09-11 | LOGIN | player_four | 30.0"
 ]
 
-# report = parse_server_logs(server_logs)
-# print(report)
+report = parse_server_logs(server_logs)
+print(report)
