@@ -10,9 +10,7 @@ def parse_server_logs(logs: List[str]) -> Dict[str, Any]:
             total_ping += float(raw_data[3])
             days = raw_data[0]
             unique_days.add(days)
-        except ValueError:
-            failed_log += 1
-        except:
+        except (ValueError, IndexError):
             failed_log += 1
     new_dict = {
         "total_ping": total_ping,
